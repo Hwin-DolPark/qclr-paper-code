@@ -80,7 +80,7 @@ class Model(nn.Module):
         self.task_name = configs.task_name
         self.pred_len = configs.pred_len
         self.output_attention = configs.output_attention
-        # Embedding
+        # Embedding - configs.d_model = 128
         self.input_fc = nn.Linear(configs.enc_in, int(configs.d_model/2))
         self.depth = 5
         self.dil_conv = DilatedConv(
@@ -88,12 +88,13 @@ class Model(nn.Module):
             [int(configs.d_model/2)] * self.depth + [configs.d_model],
             kernel_size=3
         )
+        self.sim_output_dim = configs.sim_dim #96
 
         self.proj_head_rpre = nn.Sequential(
             nn.Linear(configs.d_model, configs.d_model),
             nn.BatchNorm1d(configs.d_model),
             nn.ReLU(),
-            nn.Linear(configs.d_model, 96)
+            nn.Linear(configs.d_model, self.sim_output_dim)
         )
         self.proj_head = ProjectionHead(configs.d_model, configs.num_class,
                                         configs.d_model)

@@ -32,6 +32,24 @@ if __name__ == "__main__":
         default="Medformer",
         help="model name, options: [Medformer, Transformer, iTransformer, PatchTST, MTST, QCLR]",
     )
+    
+    #QCLR loss configurations
+    parser.add_argument('--q_lambda', type=float, default=0.1,
+                        help='Weight lambda for QCLR loss')
+    parser.add_argument('--upper_threshold', type=float, default=0.6,
+                        help='Theta neg upper for QCLR loss')
+    parser.add_argument('--init_lower_threshold', type=float, default=0.3,
+                        help='Initial theta negative lower for QCLR loss')
+    parser.add_argument('--lower_threshold', type=float, default=0.4,
+                        help='Theta negative lower for QCLR loss')
+    parser.add_argument('--positive_threshold', type=float, default=0.95,
+                        help='Theta positive for QCLR loss')
+    parser.add_argument('--epsilon', type=float, default=1e-6,
+                        help='epsilon for QCLR loss')
+
+    #QCLR model configurations
+    parser.add_argument('--sim_dim', type=int, default=96,
+                        help='Similarity Projector - Output Dimension (v)')
 
     # data loader
     parser.add_argument(

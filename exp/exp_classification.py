@@ -29,6 +29,12 @@ class Exp_Classification(Exp_Basic):
         self.swa_model = optim.swa_utils.AveragedModel(self.model)
         self.swa = args.swa
         self.train_epochs = args.train_epochs
+        self.q_lambda = args.q_lambda
+        self.upper_threshold = args.upper_threshold
+        self.init_lower_threshold = args.init_lower_threshold
+        self.lower_threshold = args.lower_threshold
+        self.positive_threshold = args.positive_threshold
+        self.epsilon = args.epsilon
 
     def qclr_loss_dynamic(self, latent_vector, true_y, current_epoch,
                           upper_threshold=0.6,  # Upper quantile for negatives
@@ -48,6 +54,11 @@ class Exp_Classification(Exp_Basic):
         Does not contrast across different classes.
         """
         total_epochs = self.train_epochs
+        upper_threshold = self.upper_threshold
+        initial_lower_threshold = self.init_lower_threshold
+        target_lower_threshold = self.lower_threshold
+        positive_quantile = self.positive_threshold
+        epsilon = self.epsilon
         # --- Parameters for the FIXED Threshold Ablation Run ---
         batch_size = latent_vector.size(0)
         device = latent_vector.device
@@ -349,8 +360,7 @@ class Exp_Classification(Exp_Basic):
                     outputs = self.model(batch_x, padding_mask, None, None)
                     output, output_qclr = outputs
                     loss1 = criterion(output, label.long())
-                    # loss1 = criterion(output, label.long())*0.9
-                    loss2 = self.qclr_loss_dynamic(output_qclr, label.long(), epoch)*0.1
+                    loss2 = self.qclr_loss_dynamic(output_qclr, label.long(), epoch)*self.q_lambda
                     # print(loss1, loss2)
                     loss = loss1 + loss2
                 else:
