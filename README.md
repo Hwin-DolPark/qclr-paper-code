@@ -1,11 +1,11 @@
 # QCLR: A Quantile-Based Contrastive Learning Framework for Sepsis Mortality Prediction and Clinical Decision Support Insights
 
 **Authors:** Hwin Dol Park (park.hwin@etri.re.kr, park.hwin@kaist.ac.kr),Jae-Hun Choi (jhchoi@etri.re.kr),<br>
- [Uichin Lee (uclee@kaist.ac.kr)](https://scholar.google.co.kr/citations?user=Sc2pBzYAAAAJ&hl=ko)
+ [Uichin Lee (uclee@kaist.ac.kr)](https://scholar.google.co.kr/citations?user=Sc2pBzYAAAAJ&hl=ko)-[Interactive Computing Laboratory](https://ic.kaist.ac.kr/)
 
 This repository contains the official implementation for QCLR the paper:
 > Hwin Dol Park, Jae-Hun Choi,Uichin Lee. "QCLR: A Quantile-Based Contrastive Learning Framework for Sepsis Mortality Prediction and Clinical Decision Support Insights." (Under Revision, IEEE Journal of Biomedical and Health Informatics).
-> [Interactive Computing Laboratory](https://ic.kaist.ac.kr/)
+
 ---
 
 ## Overview
