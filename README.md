@@ -41,7 +41,7 @@ QCLR was evaluated on three distinct datasets:
 * **Access**: Due to IRB restrictions (Seoul Asan Medical Center IRB number: 2021-15-050) and patient privacy, the ASAN dataset cannot be publicly shared.
 * **Preprocessing**: Missing values were imputed (forward/backward fill), numerical features min-max normalized ([0,1]), and sequences zero-padded. A structured random subsequence selection strategy was used for augmentation and class imbalance handling (survivors augmented 3x, deceased 6x). 
 * **Details can be found in Section IV-A, IV-B, and Appendix B of our paper.
-* **[Asan Dataset Feature Details](supplementary_material/asan_dataset.pdf)
+* [Asan Dataset Feature Details](supplementary_material/asan_dataset.pdf)
 
 ### 2. MIMIC-III Sepsis Cohort
 * **Description**: A publicly available dataset of ICU patient records. We constructed a sepsis cohort based on Sepsis-3 criteria, resulting in 12,252 sepsis patients. It includes 41 features (demographics, clinical status, treatments). The outcome is 90-day mortality.
