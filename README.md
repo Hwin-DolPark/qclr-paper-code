@@ -5,7 +5,7 @@
 
 This repository contains the official implementation for QCLR the paper:
 > Hwin Dol Park, Jae-Hun Choi,Uichin Lee. "QCLR: A Quantile-Based Contrastive Learning Framework for Sepsis Mortality Prediction and Clinical Decision Support Insights." (Under Revision, IEEE Journal of Biomedical and Health Informatics).
-[Interactive Computing Laboratory](https://ic.kaist.ac.kr/)
+> [Interactive Computing Laboratory](https://ic.kaist.ac.kr/)
 ---
 
 ## Overview
@@ -39,12 +39,15 @@ QCLR was evaluated on three distinct datasets:
 ### 1. ASAN Sepsis Dataset
 * **Description**: A private dataset comprising 30,874 sepsis cases (14,843 unique patients after preprocessing) retrospectively collected from adult patients at Asan Medical Center, Seoul, South Korea (2009-2020). It includes demographics, vital signs, lab results, and treatments (71 features). The outcome is 28-day mortality.
 * **Access**: Due to IRB restrictions (Seoul Asan Medical Center IRB number: 2021-15-050) and patient privacy, the ASAN dataset cannot be publicly shared.
-* **Preprocessing**: Missing values were imputed (forward/backward fill), numerical features min-max normalized ([0,1]), and sequences zero-padded. A structured random subsequence selection strategy was used for augmentation and class imbalance handling (survivors augmented 3x, deceased 6x). Details can be found in Section IV-A, IV-B, and Appendix B of our paper.
+* **Preprocessing**: Missing values were imputed (forward/backward fill), numerical features min-max normalized ([0,1]), and sequences zero-padded. A structured random subsequence selection strategy was used for augmentation and class imbalance handling (survivors augmented 3x, deceased 6x). 
+* **Details can be found in Section IV-A, IV-B, and Appendix B of our paper.
+  * **[Asan Dataset Feature Details](supplementary_material/asan_dataset.pdf)**
 
 ### 2. MIMIC-III Sepsis Cohort
 * **Description**: A publicly available dataset of ICU patient records. We constructed a sepsis cohort based on Sepsis-3 criteria, resulting in 12,252 sepsis patients. It includes 41 features (demographics, clinical status, treatments). The outcome is 90-day mortality.
 * **Access**: Available on PhysioNet: [MIMIC-III Clinical Database](https://physionet.org/content/mimiciii/1.4/).
 * **Preprocessing**: Similar to the ASAN dataset: imputation, min-max normalization, zero-padding. Augmentation was applied (survivors 3x, deceased 5x). Data was extracted and processed following protocols similar to those described in Komorowski et al., 2018. Details in Section IV-A and IV-B of our paper.
+* The preprocessing code for the MIMIC-III dataset is available in the github repository: https://github.com/matthieukomorowski/AI_Clinician
 
 ### 3. PTB Diagnostic ECG Database
 * **Description**: Used for myocardial infarction (MI) classification against healthy controls. ECG recordings from 198 subjects (15 channels) were downsampled, normalized, and segmented into single heartbeats, yielding 64,356 samples.
