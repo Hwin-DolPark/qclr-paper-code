@@ -98,9 +98,11 @@ All experiments can be run using the run.py script in the run_example folder wit
 ## Acknowledgement
 The codebase for some of the benchmark models and experimental framework was adapted from or inspired by the following repositories:
 
-DL4mHealth/Medformer
-DL4mHealth/COMET
-We thank the authors for making their code publicly available.
+DL4mHealth/Medformer, DL4mHealth/COMET. We thank the authors for making their code publicly available.
+
+* DL4mHealth/Medformer: https://github.com/DL4mHealth/Medformer
+
+* DL4mHealth/COMET: https://github.com/DL4mHealth/COMET
 
 ---
 
