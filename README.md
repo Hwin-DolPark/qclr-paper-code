@@ -3,8 +3,9 @@
 **Authors:** Hwin Dol Park (park.hwin@etri.re.kr, park.hwin@kaist.ac.kr), Jae-Hun Choi (jhchoi@etri.re.kr), [Uichin Lee (uclee@kaist.ac.kr)](https://scholar.google.co.kr/citations?user=Sc2pBzYAAAAJ&hl=ko)
 
 This repository contains the official implementation for QCLR the paper:
-> Hwin Dol Park, Jae-Hun Choi, Uichin Lee. "QCLR: A Quantile-Based Contrastive Learning Framework for Sepsis Mortality Prediction and Clinical Decision Support Insights." (Under Revision, IEEE Journal of Biomedical and Health Informatics).
-
+> Hwin Dol Park, Jae-Hun Choi, <br>
+Uichin Lee. "QCLR: A Quantile-Based Contrastive Learning Framework for Sepsis Mortality Prediction and Clinical Decision Support Insights." (Under Revision, IEEE Journal of Biomedical and Health Informatics).
+[Interactive Computing Laboratory](https://ic.kaist.ac.kr/)
 ---
 
 ## Overview
@@ -23,7 +24,7 @@ Sepsis, a life-threatening organ dysfunction, requires accurate clinical decisio
 The workflow of the QCLR framework is illustrated below:
 
 <p align="center">
-  <img src="fig/fig_overview.pdf" alt="QCLR Workflow" width="800"/>
+  <img src="fig/fig_overview.png" alt="QCLR Workflow" width="800"/>
   </p>
 <p align="center">
   <em><b>Figure 1:</b> Workflow of the QCLR framework. Input patient data (X) is processed by the Sequence Augmentation Module to generate X', and both are fed to the Medical Encoder, yielding a core representation <b>z</b>. This representation <b>z</b> serves dual pathways: (i) the Mortality Decoder uses it for outcome prediction (ŷ<sub>i</sub>) via a binary cross-entropy loss (𝓛<sub>BCE</sub>), and (ii) the Similarity Projector maps <b>z</b> to an embedding <b>v</b> where our novel QCLR loss (L<sub>QCLR</sub>) is applied. The L<sub>QCLR</sub> refines these embeddings by contrasting positive and negative pairs selected based on similarity quantiles within the same outcome class. Through joint optimization of 𝓛<sub>BCE</sub> and L<sub>QCLR</sub>, the trained model can predict mortality risk for new patients and retrieve clinically similar historical cases.</em>
