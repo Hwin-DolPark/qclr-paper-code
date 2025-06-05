@@ -90,34 +90,40 @@ class Model(nn.Module):
         )
         self.sim_output_dim = configs.sim_dim #96
 
-        self.proj_head_rpre = nn.Sequential(
+        # Similarity Projector Module - Representation Vector
+        self.proj_head_representation = nn.Sequential(
             nn.Linear(configs.d_model, configs.d_model),
             nn.BatchNorm1d(configs.d_model),
             nn.ReLU(),
             nn.Linear(configs.d_model, self.sim_output_dim)
         )
-        self.proj_head = ProjectionHead(configs.d_model, configs.num_class,
+
+        # Mortality Decoder Module - measure clinical outcome
+        self.proj_head_clinical_outcome = ProjectionHead(configs.d_model, configs.num_class,
                                         configs.d_model)
 
-    def classification_qclr(self, x_enc, x_mark_enc):
+    def medical_encoder(self, x_enc, x_mark_enc):
         x = self.input_fc(x_enc)
         x = x.transpose(1, 2)
         x = self.dil_conv(x)
         x = x.transpose(1, 2)
 
-        out = F.max_pool1d(x.transpose(1, 2), kernel_size=x.size(1)).transpose(1, 2)
-        out = out.squeeze(1)
+        # z - Encoded Representation
+        encoded_representation = F.max_pool1d(x.transpose(1, 2), kernel_size=x.size(1)).transpose(1, 2)
+        out = encoded_representation.squeeze(1)
 
-        output_qclr = self.proj_head_rpre(out)
-        output = self.proj_head(out)
+        # v - Representation Vector
+        representation_vector = self.proj_head_representation(out)
+        # y^hat - Predicted Mortality
+        output = self.proj_head_clinical_outcome(out)
 
-        return (output, output_qclr)
+        return (output, representation_vector)
 
     def forward(self, x_enc, x_mark_enc, x_dec, x_mark_dec, mask=None):
         if self.task_name == "classification_qclr" or self.task_name == "classification_qclr_asan":
-            dec_out = self.classification_qclr(x_enc, x_mark_enc)
+            dec_out = self.medical_encoder(x_enc, x_mark_enc)
             return dec_out  # [B, N]
         if self.task_name == "classification_asan":
-            dec_out = self.classification_qclr(x_enc, x_mark_enc)
+            dec_out = self.medical_encoder(x_enc, x_mark_enc)
             return dec_out  # [B, N]
         return None
